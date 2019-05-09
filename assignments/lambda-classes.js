@@ -26,6 +26,14 @@ class Instructors extends Person {
     grade(student, subject) {
         return `${student.name} receives a perfect score on ${subject}.`
     }
+    randomGrade(student) {
+        let newGrade = student.grade + Math.round((Math.random() - Math.random()) * 100);
+        if (newGrade >= 70) {
+            return `Congradulations, ${student.name}, you graduated with a ${newGrade}%!`
+        } else {
+            return `Keep grading ${student.name}'s assignments. The grade is at ${newGrade}%.`
+        }
+    }
 }
 
 class Students extends Person {
@@ -34,9 +42,10 @@ class Students extends Person {
         this.previousBackground = attributes.previousBackground;
         this.className = attributes.className;
         this.favSubjects = attributes.favSubjects;
+        this.grade = attributes.grade;
     }
-    listsSubjects() {
-        return `${this.name} enjoys ${this.favSubjects}.`
+    listsSubjects(...favSubjects) {
+        return `${this.name} enjoys: ${this.favSubjects.join(", ")}.`
     }
     prAssignment(subject) {
         return `${this.name} has submitted a PR for ${subject}.`
@@ -68,7 +77,8 @@ const danielLaRusso = new Students(
         gender: "male",
         previousBackground: "Waxing Cars",
         className: "Android Development",
-        favSubjects: "karate"
+        favSubjects: ["Java", "JavaScript", "CSS", "HTML", "Karate"],
+        grade: 70
     }
 );
 
@@ -80,7 +90,8 @@ const harryPotter = new Students(
         gender: "male",
         previousBackground: "Seeker",
         className: "iOS Development",
-        favSubjects: "Quidditch"
+        favSubjects: ["Java", "JavaScript", "CSS", "HTML"],
+        grade: 70
     }
 );
 
@@ -135,7 +146,7 @@ const jeanLucPicard = new ProjectManagers(
         favInstructor: "Mr. Miyagi"
     }
 )
-
+//PM
 console.log(jeanLucPicard.name);
 console.log(jeanLucPicard.age);
 console.log(jeanLucPicard.location);
@@ -146,7 +157,9 @@ console.log(jeanLucPicard.favInstructor);
 console.log(jeanLucPicard.standUp("@Web_20"));
 console.log(jeanLucPicard.debugsCode(harryPotter.name, harryPotter.favSubjects));
 console.log(jeanLucPicard.speak());
+console.log(jeanLucPicard.randomGrade(harryPotter));
 
+//Instructor
 console.log(severusSnape.name);
 console.log(severusSnape.age);
 console.log(severusSnape.location);
@@ -156,7 +169,9 @@ console.log(severusSnape.catchPhrase);
 console.log(severusSnape.demo("CSS"));
 console.log(severusSnape.grade(harryPotter, "HTML"));
 console.log(severusSnape.speak());
+console.log(severusSnape.randomGrade(danielLaRusso));
 
+//Student
 console.log(harryPotter.name);
 console.log(harryPotter.age);
 console.log(harryPotter.location);
